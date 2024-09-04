@@ -85,7 +85,13 @@ public class Model {
      *  Empty spaces are stored as null.
      * */
     public boolean emptySpaceExists() {
-        // TODO: Task 1. Fill in this function.
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                if (this.board.tile(i, j) == null) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
@@ -95,7 +101,16 @@ public class Model {
      * given a Tile object t, we get its value with t.value().
      */
     public boolean maxTileExists() {
-        // TODO: Task 2. Fill in this function.
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                Tile tile = this.board.tile(i, j);
+                if (tile != null) {
+                    if (tile.value() == MAX_PIECE) {
+                        return true;
+                    }
+                }
+            }
+        }
         return false;
     }
 
@@ -106,7 +121,42 @@ public class Model {
      * 2. There are two adjacent tiles with the same value.
      */
     public boolean atLeastOneMoveExists() {
-        // TODO: Task 3. Fill in this function.
+        if (emptySpaceExists()) {
+            return true;
+        }
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                Tile tile = this.board.tile(i, j);
+
+                if (i < 3) {
+                    Tile right = this.board.tile(i + 1, j);
+                    if (tile.value() == right.value()) {
+                        return true;
+                    }
+                }
+
+                if (i > 0) {
+                    Tile left = this.board.tile(i - 1, j);
+                    if (tile.value() == left.value()) {
+                        return true;
+                    }
+                }
+
+                if (j < 3) {
+                    Tile top = this.board.tile(i, j + 1);
+                    if (tile.value() == top.value()) {
+                        return true;
+                    }
+                }
+
+                if (j > 0) {
+                    Tile bottom = this.board.tile(i, j - 1);
+                    if (tile.value() == bottom.value()) {
+                        return true;
+                    }
+                }
+            }
+        }
         return false;
     }
 

@@ -179,6 +179,18 @@ public class Model {
         int myValue = currTile.value();
         int targetY = y;
 
+        while (targetY < 3) {
+            targetY++;
+            if (board.tile(x, targetY) != null) {
+                if (board.tile(x, targetY).value() != myValue) {
+                    targetY--;
+                }
+                break;
+            }
+        }
+
+        board.move(x, targetY, currTile);
+
         // TODO: Tasks 5, 6, and 10. Fill in this function.
     }
 

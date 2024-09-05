@@ -182,7 +182,7 @@ public class Model {
         while (targetY < 3) {
             targetY++;
             if (board.tile(x, targetY) != null) {
-                if (board.tile(x, targetY).value() != myValue) {
+                if (board.tile(x, targetY).value() != myValue || board.tile(x, targetY).wasMerged()) {
                     targetY--;
                 }
                 break;

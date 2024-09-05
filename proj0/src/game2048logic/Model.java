@@ -193,8 +193,6 @@ public class Model {
         if (currTile.wasMerged()) {
             this.score += 2 * currTile.value();
         }
-
-        // TODO: Tasks 5, 6, and 10. Fill in this function.
     }
 
     /** Handles the movements of the tilt in column x of board B

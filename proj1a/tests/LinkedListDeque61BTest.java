@@ -111,5 +111,18 @@ public class LinkedListDeque61BTest {
         lld1.removeLast(); // [-1, 0, 1]
 
         assertThat(lld1.toList()).containsExactly(-1, 0, 1).inOrder();
+
+        Deque61B<Integer> LinkedListDeque = new LinkedListDeque61B<>();
+        LinkedListDeque.addLast(0);
+        LinkedListDeque.removeFirst();
+        LinkedListDeque.addLast(3);
+        LinkedListDeque.addFirst(4);
+        LinkedListDeque.removeFirst();
+        LinkedListDeque.addFirst(6);
+        LinkedListDeque.size();
+        int second = LinkedListDeque.get(1);
+        assertThat(second ==  3).isTrue();
+
+
     }
 }

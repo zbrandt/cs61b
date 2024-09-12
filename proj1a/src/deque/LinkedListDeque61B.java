@@ -72,24 +72,48 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
 
     @Override
     public T removeFirst() {
-        Node old = this.sentinel.next;
-        Node second = this.sentinel.next.next;
-        this.sentinel.next = second;
-        old.prev = null;
-        old.next = null;
-        this.size--;
-        return old.item;
+        if (this.size == 0) {
+            return null;
+        } else if (this.size == 1) {
+            Node old = this.sentinel.next;
+            this.sentinel.next = this.sentinel;
+            this.sentinel.prev = this.sentinel;
+            old.prev = null;
+            old.next = null;
+            this.size--;
+            return old.item;
+        } else {
+            Node old = this.sentinel.next;
+            Node second = this.sentinel.next.next;
+            this.sentinel.next = second;
+            old.prev = null;
+            old.next = null;
+            this.size--;
+            return old.item;
+        }
     }
 
     @Override
     public T removeLast() {
-        Node old = this.sentinel.prev;
-        Node penultimate = this.sentinel.prev.prev;
-        this.sentinel.prev = penultimate;
-        old.next = null;
-        old.prev = null;
-        this.size--;
-        return old.item;
+        if (this.size == 0) {
+            return null;
+        } else if (this.size == 1) {
+            Node old = this.sentinel.prev;
+            this.sentinel.next = this.sentinel;
+            this.sentinel.prev = this.sentinel;
+            old.prev = null;
+            old.next = null;
+            this.size--;
+            return old.item;
+        } else {
+            Node old = this.sentinel.prev;
+            Node penultimate = this.sentinel.prev.prev;
+            this.sentinel.prev = penultimate;
+            old.next = null;
+            old.prev = null;
+            this.size--;
+            return old.item;
+        }
     }
 
     @Override

@@ -84,8 +84,9 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
             return old.item;
         } else {
             Node old = this.sentinel.next;
-            Node second = this.sentinel.next.next;
+            Node second = this.sentinel.next.next; // set second's previous
             this.sentinel.next = second;
+            second.prev = this.sentinel;
             old.prev = null;
             old.next = null;
             this.size--;
@@ -107,8 +108,9 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
             return old.item;
         } else {
             Node old = this.sentinel.prev;
-            Node penultimate = this.sentinel.prev.prev;
+            Node penultimate = this.sentinel.prev.prev; // set penultimate's next
             this.sentinel.prev = penultimate;
+            penultimate.next = this.sentinel;
             old.next = null;
             old.prev = null;
             this.size--;

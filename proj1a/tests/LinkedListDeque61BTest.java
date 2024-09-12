@@ -73,6 +73,8 @@ public class LinkedListDeque61BTest {
 
          assertThat(lld2.size() == 0).isTrue();
          assertThat(lld2.isEmpty()).isTrue();
+         assertThat(lld2.toList().isEmpty()).isTrue();
+         assertThat(lld1.isEmpty()).isFalse();
     }
 
     @Test
@@ -112,17 +114,26 @@ public class LinkedListDeque61BTest {
 
         assertThat(lld1.toList()).containsExactly(-1, 0, 1).inOrder();
 
-        Deque61B<Integer> LinkedListDeque = new LinkedListDeque61B<>();
-        LinkedListDeque.addLast(0);
-        LinkedListDeque.removeFirst();
-        LinkedListDeque.addLast(3);
-        LinkedListDeque.addFirst(4);
-        LinkedListDeque.removeFirst();
-        LinkedListDeque.addFirst(6);
-        LinkedListDeque.size();
-        int second = LinkedListDeque.get(1);
+        Deque61B<Integer> lld2 = new LinkedListDeque61B<>();
+        lld2.addLast(0);
+        lld2.removeFirst();
+        lld2.addLast(3);
+        lld2.addFirst(4);
+        lld2.removeFirst();
+        lld2.addFirst(6);
+        lld2.size();
+        int second = lld2.get(1);
         assertThat(second ==  3).isTrue();
 
+        Deque61B<Integer> lld3 = new LinkedListDeque61B<>();
+        lld3.addFirst(0);
+        lld3.addLast(4);
+        lld3.removeLast();
+        lld3.removeLast();
+        lld3.addLast(3);
+        lld3.addFirst(1);
+        int second2 = lld3.get(1);
+        assertThat(second2 == 3).isTrue();
 
     }
 }

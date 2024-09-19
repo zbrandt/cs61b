@@ -41,7 +41,7 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
 
         int i = nextFirst + 1;
         while (returnList.size() < size) {
-            if (i == items.length - 1) {
+            if (i == items.length) {
                 i = 0;
             }
             returnList.add(items[i]);
@@ -63,26 +63,34 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
 
     @Override
     public T removeFirst() {
-        int i = Math.floorMod(nextFirst + 1, items.length);
-        nextFirst = i;
-        size -= 1;
-        T x = items[i];
-        if ((double) size / items.length < 0.25 && items.length >= 16) {
-            resize(size);
+        if (size > 0) {
+            int i = Math.floorMod(nextFirst + 1, items.length);
+            nextFirst = i;
+            size -= 1;
+            T x = items[i];
+            if ((double) size / items.length < 0.25 && items.length >= 16) {
+                resize(size);
+            }
+            return x;
+        } else {
+            return null;
         }
-        return x;
     }
 
     @Override
     public T removeLast() {
-        int i = Math.floorMod(nextLast - 1, items.length);
-        nextLast = i;
-        size -= 1;
-        T x = items[i];
-        if ((double) size / items.length < 0.25 && items.length >= 16) {
-            resize(size);
+        if (size > 0) {
+            int i = Math.floorMod(nextLast - 1, items.length);
+            nextLast = i;
+            size -= 1;
+            T x = items[i];
+            if ((double) size / items.length < 0.25 && items.length >= 16) {
+                resize(size);
+            }
+            return x;
+        } else {
+            return null;
         }
-        return x;
     }
 
     @Override
@@ -107,6 +115,7 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
             a[j] = this.get(i);
         }
         items = a;
+        nextLast = nextFirst + 1 + size;
     }
 
     @Override

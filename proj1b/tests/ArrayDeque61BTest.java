@@ -19,17 +19,156 @@ public class ArrayDeque61BTest {
 
          assertWithMessage("Found fields that are not array or primitives").that(badFields).isEmpty();
      }
+
      @Test
-     void addFirstAndLast() {
+     void testAdd() {
          ArrayDeque61B<Integer> d = new ArrayDeque61B<>();
+
+         // add first from empty
          d.addFirst(1);
+         assertThat(d.get(0) == 1).isTrue();
+
+         // add first non empty
          d.addFirst(2);
-         d.addLast(3);
-         assertThat(d.get(2) == 3).isTrue();
+         assertThat(d.get(0) == 2).isTrue();
+
+         // add first trigger resize
+         d.addFirst(3);
+         d.addFirst(4);
+         d.addFirst(5);
+         d.addFirst(6);
+         d.addFirst(7);
+         d.addFirst(8);
+         d.addFirst(9);
+         assertThat(d.get(0) == 9).isTrue();
+
+         ArrayDeque61B<Integer> f = new ArrayDeque61B<>();
+
+         // add last from empty
+         f.addLast(1);
+         assertThat(f.get(f.size() - 1) == 1).isTrue();
+
+         // add last nonempty
+         f.addLast(2);
+         assertThat(f.get(f.size() - 1) == 2).isTrue();
+
+         // add last trigger resize
+         f.addLast(3);
+         f.addLast(4);
+         f.addLast(5);
+         f.addLast(6);
+         f.addLast(7);
+         f.addLast(8);
+         f.addLast(9);
+         assertThat(f.get(f.size() - 1) == 9).isTrue();
      }
 
      @Test
-     void isEmptyAndSize() {
+     void testAddAfterRemove() {
+         ArrayDeque61B<Integer> d = new ArrayDeque61B<>();
+         d.addFirst(1);
+
+         // add first after remove to empty
+         d.removeFirst();
+         d.addFirst(1);
+         assertThat(d.get(0) == 1).isTrue();
+
+         // add last after remove to empty
+         d.removeLast();
+         d.addLast(1);
+         assertThat(d.get(d.size() - 1) == 1).isTrue();
+     }
+
+     @Test
+     void testRemove() {
+         ArrayDeque61B<Integer> d = new ArrayDeque61B<>();
+         for (int i = 1; i <= 17; i++) {
+             d.addFirst(i);
+         }
+
+         // remove first trigger resize
+         d.removeFirst();
+         assertThat(d.get(0) == 16).isTrue();
+
+         ArrayDeque61B<Integer> f = new ArrayDeque61B<>();
+         f.addFirst(3);
+         f.addFirst(2);
+         f.addFirst(1);
+
+         // remove first
+         f.removeFirst();
+         assertThat(f.get(0) == 2).isTrue();
+
+         // remove first to one
+         f.removeFirst();
+         assertThat(f.get(0) == 3).isTrue();
+
+         // remove first to empty
+         f.removeFirst();
+         assertThat(f.isEmpty()).isTrue();
+
+         ArrayDeque61B<Integer> g = new ArrayDeque61B<>();
+         for (int i = 1; i <= 17; i++) {
+             g.addLast(i);
+         }
+
+         // remove last trigger resize
+         g.removeLast();
+         assertThat(g.get(g.size() - 1) == 16).isTrue();
+
+         ArrayDeque61B<Integer> h = new ArrayDeque61B<>();
+         h.addLast(1);
+         h.addLast(2);
+         h.addLast(3);
+
+         // remove last
+         h.removeLast();
+         assertThat(h.get(h.size() - 1) == 2).isTrue();
+
+         // remove last to one
+         h.removeLast();
+         assertThat(h.get(h.size() - 1) == 1).isTrue();
+
+         // remove last to empty
+         h.removeLast();
+         assertThat(h.isEmpty()).isTrue();
+
+     }
+
+     @Test
+     void testGet() {
+         ArrayDeque61B<Integer> d = new ArrayDeque61B<>();
+
+         // get valid
+         d.addFirst(1);
+         assertThat(d.get(0) == 1).isTrue();
+
+         // get out of bonds negative
+         assertThat(d.get(-1) == null).isTrue();
+
+         // get out of bonds large
+         assertThat(d.get(1) == null).isTrue();
+     }
+
+     @Test
+     void testSize() {
+         ArrayDeque61B<Integer> d = new ArrayDeque61B<>();
+
+         // size
+         assertThat(d.size() == 0).isTrue();
+
+         // size after remove from empty
+         d.removeFirst();
+         assertThat(d.size() == 0).isTrue();
+
+         // size after remove to empty
+         d.addFirst(1);
+         d.removeFirst();
+         assertThat(d.size() == 0).isTrue();
+     }
+
+     @Test
+     void testIsEmpty() {
          ArrayDeque61B<Integer> d = new ArrayDeque61B<>();
          assertThat(d.size() == 0).isTrue();
          assertThat(d.isEmpty()).isTrue();
@@ -40,13 +179,23 @@ public class ArrayDeque61BTest {
      }
 
      @Test
-     void toList() {
+     void testToList() {
          ArrayDeque61B<Integer> d = new ArrayDeque61B<>();
+
+         // to list empty
+         assertThat(d.toList().isEmpty()).isTrue();
+
+         // to list nonempty
          d.addFirst(1);
          d.addLast(2);
          d.addFirst(3);
          assertThat(d.toList()).containsExactly(3, 1, 2).inOrder();
      }
+
+//     @Test
+//     void testAdvancedResize() {
+//         // resize up and resize down
+//     }
 
      @Test
      void removeFirstAndLast() {

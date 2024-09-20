@@ -69,7 +69,7 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
             size -= 1;
             T x = items[i];
             if ((double) size / items.length < 0.25 && items.length >= 16) {
-                resize(size);
+                resize(items.length / 2);
             }
             return x;
         } else {
@@ -85,7 +85,7 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
             size -= 1;
             T x = items[i];
             if ((double) size / items.length < 0.25 && items.length >= 16) {
-                resize(size);
+                resize(items.length / 2);
             }
             return x;
         } else {
@@ -111,11 +111,12 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
     public void resize(int cap) {
         T[] a = (T[]) new Object[cap];
         for (int i = 0; i < size; i++) {
-            int j = Math.floorMod(nextFirst + i + 1, a.length);
+            int j = Math.floorMod(nextFirst + 1 + i, a.length);
             a[j] = this.get(i);
         }
         items = a;
-        nextLast = nextFirst + 1 + size;
+        nextFirst = Math.floorMod(nextFirst, a.length);
+        nextLast = Math.floorMod(nextFirst + 1 + size, a.length);
     }
 
     @Override

@@ -82,13 +82,15 @@ public class ArrayDeque61BTest {
      @Test
      void testRemove() {
          ArrayDeque61B<Integer> d = new ArrayDeque61B<>();
-         for (int i = 1; i <= 17; i++) {
+         for (int i = 1; i <= 9; i++) {
              d.addFirst(i);
          }
 
          // remove first trigger resize
-         d.removeFirst();
-         assertThat(d.get(0) == 16).isTrue();
+         for (int j = 1; j <= 6; j++) {
+             d.removeFirst();
+         }
+         assertThat(d.get(0) == 3).isTrue();
 
          ArrayDeque61B<Integer> f = new ArrayDeque61B<>();
          f.addFirst(3);
@@ -108,13 +110,15 @@ public class ArrayDeque61BTest {
          assertThat(f.isEmpty()).isTrue();
 
          ArrayDeque61B<Integer> g = new ArrayDeque61B<>();
-         for (int i = 1; i <= 17; i++) {
+         for (int i = 1; i <= 9; i++) {
              g.addLast(i);
          }
 
          // remove last trigger resize
-         g.removeLast();
-         assertThat(g.get(g.size() - 1) == 16).isTrue();
+         for (int j = 1; j <= 6; j++) {
+             g.removeLast();
+         }
+         assertThat(g.get(g.size() - 1) == 3).isTrue();
 
          ArrayDeque61B<Integer> h = new ArrayDeque61B<>();
          h.addLast(1);

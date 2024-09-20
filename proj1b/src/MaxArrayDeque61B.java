@@ -1,10 +1,10 @@
 import java.util.Comparator;
 
 public class MaxArrayDeque61B<T> extends ArrayDeque61B<T> {
-    Comparator<T> c;
+    Comparator<T> comp;
 
     public MaxArrayDeque61B(Comparator<T> c) {
-        this.c = c;
+        comp = c;
     }
 
     public T max() {
@@ -13,7 +13,7 @@ public class MaxArrayDeque61B<T> extends ArrayDeque61B<T> {
         }
         T max = get(0);
         for (int i = 0; i < size(); i++) {
-            if (c.compare(max, get(i)) < 0) {
+            if (comp.compare(max, get(i)) < 0) {
                 max = get(i);
             }
         }

@@ -7,6 +7,7 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
     private int size;
     private int nextFirst;
     private int nextLast;
+    public static int LIMIT = 16;
 
     public ArrayDeque61B() {
         items = (T[]) new Object[8];
@@ -68,7 +69,7 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
             nextFirst = i;
             size -= 1;
             T x = items[i];
-            if ((double) size / items.length < 0.25 && items.length >= 16) {
+            if ((double) size / items.length < 0.25 && items.length >= LIMIT) {
                 resize(items.length / 2);
             }
             return x;
@@ -84,7 +85,7 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
             nextLast = i;
             size -= 1;
             T x = items[i];
-            if ((double) size / items.length < 0.25 && items.length >= 16) {
+            if ((double) size / items.length < 0.25 && items.length >= LIMIT) {
                 resize(items.length / 2);
             }
             return x;

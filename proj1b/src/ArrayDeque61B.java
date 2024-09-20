@@ -150,8 +150,8 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
         if (this == other) {
             return true;
         }
-        if (other instanceof ArrayDeque61B otherSet) {
-            if (this.size != otherSet.size) {
+        if (other instanceof Deque61B otherSet) {
+            if (this.size != otherSet.size()) {
                 return false;
             }
             for (int i = 0; i < size; i++) {

@@ -20,6 +20,14 @@ public class MaxArrayDeque61BTest {
         }
     }
 
+    private static class NegativeSizeComparator implements Comparator<Integer> {
+
+        @Override
+        public int compare(Integer integer, Integer t1) {
+            return -1 * (integer - t1);
+        }
+    }
+
 
 
     @Test
@@ -40,7 +48,7 @@ public class MaxArrayDeque61BTest {
         MaxArrayDeque61B<Integer> f = new MaxArrayDeque61B<>(new IntegerSizeComparator());
         f.addFirst(1);
         f.addFirst(2);
-        assertThat(f.max()).isEqualTo(2);
+        assertThat(f.max(new NegativeSizeComparator())).isEqualTo(1);
     }
     
 }

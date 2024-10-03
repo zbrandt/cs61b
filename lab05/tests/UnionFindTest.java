@@ -86,6 +86,20 @@ public class UnionFindTest {
      * of all methods in your implementation.
      */
 
+    @Test
+    public void correctnessTest() {
+        UnionFind uf = new UnionFind(4);
+        assertThat(uf.sizeOf(0)).isEqualTo(1);
+        assertThat(uf.connected(0,1)).isFalse();
+
+        uf.union(0,1);
+        assertThat(uf.sizeOf(0)).isEqualTo(2);
+        assertThat(uf.sizeOf(1)).isEqualTo(2);
+        assertThat(uf.parent(0)).isEqualTo(1);
+        assertThat(uf.parent(1)).isEqualTo(-2);
+        assertThat(uf.connected(0,1)).isTrue();
+        assertThat(uf.connected(2,3)).isFalse();
+    }
 }
 
 

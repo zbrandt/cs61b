@@ -75,7 +75,10 @@ public class Percolation {
     }
 
     public boolean percolates() {
-        return this.topAndBottom.connected(topIndex, bottomIndex);
+        if (this.N != 1) {
+            return this.topAndBottom.connected(topIndex, bottomIndex);
+        }
+        return isOpen(0,0);
     }
 
     private int xyTo1D(int r, int c) {

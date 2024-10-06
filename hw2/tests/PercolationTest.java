@@ -101,5 +101,13 @@ public class PercolationTest {
         assertThat(p.percolates()).isFalse();
         p.open(1,1);
         assertThat(p.percolates()).isTrue();
+
+        p = new Percolation(1);
+        assertThat(p.percolates()).isFalse();
+        assertThat(p.isFull(0,0) && p.isOpen(0,0)).isFalse();
+        p.open(0,0);
+        assertThat(p.percolates()).isTrue();
+        assertThat(p.isFull(0,0)).isTrue();
+
     }
 }

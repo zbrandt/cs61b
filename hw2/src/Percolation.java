@@ -13,6 +13,9 @@ public class Percolation {
 
 
     public Percolation(int N) {
+        if (N <= 0) {
+            throw new IllegalArgumentException();
+        }
         this.N = N;
         this.topIndex = N * N;
         this.bottomIndex = N * N + 1;
@@ -40,19 +43,21 @@ public class Percolation {
     }
 
     public void open(int row, int col) {
-        this.sites[row][col] = 1;
-        this.opens += 1;
+        if (this.sites[row][col] == 0) {
+            this.sites[row][col] = 1;
+            this.opens += 1;
 
-        // check adjacent FIX THIS CHECK ONLY 4
-        int[] rowOffset = new int[]{-1, 0, 1, 0};
-        int[] colOffset = new int[]{0, 1, 0, -1};
-        for (int i = 0; i < 4; i++) {
-            int nextRow = row + rowOffset[i];
-            int nextCol = col + colOffset[i];
+            // check adjacent FIX THIS CHECK ONLY 4
+            int[] rowOffset = new int[]{-1, 0, 1, 0};
+            int[] colOffset = new int[]{0, 1, 0, -1};
+            for (int i = 0; i < 4; i++) {
+                int nextRow = row + rowOffset[i];
+                int nextCol = col + colOffset[i];
 
-            if (isValid(nextRow, nextCol) && this.sites[nextRow][nextCol] == 1) {
-                this.topAndBottom.union(xyTo1D(row, col), xyTo1D(nextRow, nextCol));
-                this.noBottom.union(xyTo1D(row, col), xyTo1D(nextRow, nextCol));
+                if (isValid(nextRow, nextCol) && this.sites[nextRow][nextCol] == 1) {
+                    this.topAndBottom.union(xyTo1D(row, col), xyTo1D(nextRow, nextCol));
+                    this.noBottom.union(xyTo1D(row, col), xyTo1D(nextRow, nextCol));
+                }
             }
         }
     }

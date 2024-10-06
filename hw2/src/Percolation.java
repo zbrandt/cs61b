@@ -2,7 +2,6 @@ import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 
 public class Percolation {
-    // TODO: Add any necessary instance variables.
     WeightedQuickUnionUF topAndBottom;
     WeightedQuickUnionUF noBottom;
     int[][] sites;
@@ -14,7 +13,6 @@ public class Percolation {
 
 
     public Percolation(int N) {
-        // TODO: Fill in this constructor.
         this.N = N;
         this.topIndex = N * N;
         this.bottomIndex = N * N + 1;
@@ -42,7 +40,6 @@ public class Percolation {
     }
 
     public void open(int row, int col) {
-        // TODO: Fill in this method.
         this.sites[row][col] = 1;
         this.opens += 1;
 
@@ -61,27 +58,20 @@ public class Percolation {
     }
 
     public boolean isOpen(int row, int col) {
-        // TODO: Fill in this method.
         return this.sites[row][col] == 1;
     }
 
     public boolean isFull(int row, int col) {
-        // TODO: Fill in this method.
         return isOpen(row, col) && this.noBottom.connected(this.N * this.N, xyTo1D(row, col));
     }
 
     public int numberOfOpenSites() {
-        // TODO: Fill in this method.
         return this.opens;
     }
 
     public boolean percolates() {
-        // TODO: Fill in this method.
         return this.topAndBottom.connected(topIndex, bottomIndex);
     }
-
-    // TODO: Add any useful helper methods (we highly recommend this!).
-    // TODO: Remove all TODO comments before submitting.
 
     private int xyTo1D(int r, int c) {
         return this.N * r + c;

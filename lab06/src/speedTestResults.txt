@@ -1,0 +1,63 @@
+100 strings:
+
+    ULLMap: 0.00 sec
+    BSTMap: 0.00 sec
+    TreeMap: 0.00 sec
+    HashMap: 0.00 sec
+
+At this small input there were no noticable differences.
+
+1,000 strings:
+
+    ULLMap: 0.01 sec
+    BSTMap: 0.00 sec
+    TreeMap: 0.00 sec
+    HashMap: 0.00 sec
+
+Run time still low but ULLMap displays the first non-zero result.
+
+10,000 strings:
+
+    ULLMap: 0.54 sec
+    BSTMap: 0.01 sec
+    TreeMap: 0.01 sec
+    HashMap: 0.00 sec
+
+ULLMap slowing down to half a second whereas BSTMap and TreeMap have not grown significantly.
+
+100,000 strings:
+
+    ULLMap: (Stack Overflow – test failed)
+    BSTMap: 0.04 sec
+    TreeMap: 0.03 sec
+    HashMap: 0.02 sec
+
+ULLMap fails at this input, and the others are still growing quite slow. BSTMap slightly slower than the others.
+
+1,000,000 strings:
+
+    ULLMap: (Stack Overflow – test failed)
+    BSTMap: 0.58 sec
+    TreeMap: 0.49 sec
+    HashMap: 0.20 sec
+
+Hash map showing an advantage with both BSTMap and TreeMap similar level but slower at this high input level.
+
+10,000,000 strings:
+
+    ULLMap: (Stack Overflow – test failed)
+    BSTMap: 9.40 sec
+    TreeMap: 7.43 sec
+    HashMap: 2.40 sec
+
+At this large size the differences are pretty tangible with BSTMap falling behind TreeMap but both significantly behind HashMap.
+
+100,000,000 strings:
+
+    ULLMap: (Stack Overflow – test failed)
+    BSTMap: 103.58 sec
+    TreeMap: 88.85 sec
+    HashMap: 27.30 sec
+
+At this last input, BSTMap a lot slower than TreeMap but both are still way slower than HashMap. BSTMap does seem to display approximately logN growth,
+and with the random insertions it should tend to avoid spindly constant N growth time for the most part, but TreeMap still clearly ahead at the end.

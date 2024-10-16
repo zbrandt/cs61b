@@ -36,14 +36,12 @@ public class TimeSeries extends TreeMap<Integer, Double> {
                 this.put(i, ts.get(i));
             }
         }
-        // TODO: Fill in this constructor.
     }
 
     /**
      *  Returns all years for this time series in ascending order.
      */
     public List<Integer> years() {
-        // TODO: Fill in this method.
         return new ArrayList<>(this.keySet());
     }
 
@@ -52,7 +50,6 @@ public class TimeSeries extends TreeMap<Integer, Double> {
      *  order of years().
      */
     public List<Double> data() {
-        // TODO: Fill in this method.
         return new ArrayList<>(this.values());
     }
 
@@ -66,7 +63,6 @@ public class TimeSeries extends TreeMap<Integer, Double> {
      * should store the value from the TimeSeries that contains that year.
      */
     public TimeSeries plus(TimeSeries ts) {
-        // TODO: Fill in this method.
         for (int i = 0; i < ts.years().size(); i++) {
             this.merge(ts.years().get(i), ts.data().get(i), Double::sum);
         }
@@ -83,7 +79,6 @@ public class TimeSeries extends TreeMap<Integer, Double> {
      * If TS has a year that is not in this TimeSeries, ignore it.
      */
     public TimeSeries dividedBy(TimeSeries ts) {
-        // TODO: Fill in this method.
         if (!this.years().equals(ts.years())) {
             throw new IllegalArgumentException();
         }
@@ -95,7 +90,4 @@ public class TimeSeries extends TreeMap<Integer, Double> {
         }
         return divided;
     }
-
-    // TODO: Add any private helper methods.
-    // TODO: Remove all TODO comments before submitting.
 }

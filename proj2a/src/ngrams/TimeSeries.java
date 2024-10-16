@@ -31,8 +31,12 @@ public class TimeSeries extends TreeMap<Integer, Double> {
      */
     public TimeSeries(TimeSeries ts, int startYear, int endYear) {
         super();
+        for (int i = startYear; i <= endYear; i++) {
+            if (ts.years().contains(i)) {
+                this.put(i, ts.get(i));
+            }
+        }
         // TODO: Fill in this constructor.
-
     }
 
     /**
@@ -80,7 +84,7 @@ public class TimeSeries extends TreeMap<Integer, Double> {
      */
     public TimeSeries dividedBy(TimeSeries ts) {
         // TODO: Fill in this method.
-        if (!this.values().equals(ts.values())) {
+        if (!this.years().equals(ts.years())) {
             throw new IllegalArgumentException();
         }
         TimeSeries divided = new TimeSeries();

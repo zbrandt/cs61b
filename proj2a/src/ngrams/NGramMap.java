@@ -107,9 +107,10 @@ public class NGramMap {
         if (!this.map.containsKey(word)) {
             return new TimeSeries();
         } else {
-            TimeSeries numerator = new TimeSeries(this.map.get(word), startYear, endYear);
-            TimeSeries denominator = new TimeSeries(this.counts, startYear, endYear);
-            return numerator.dividedBy(denominator);
+            TimeSeries numerator = this.map.get(word);
+            TimeSeries denominator = this.counts;
+            TimeSeries quotient = numerator.dividedBy(denominator);
+            return new TimeSeries(quotient, startYear, endYear);
         }
     }
 

@@ -29,7 +29,11 @@ public class HistoryTextHandler extends NgordnetQueryHandler {
 
             List<Double> data = ts.data();
             for (int i = 0; i < years.size(); i++) {
-                response += years.get(i) + "=" + data.get(i) + ", ";
+                if (i != years.size() - 1) {
+                    response += years.get(i) + "=" + data.get(i) + ", ";
+                } else {
+                    response += years.get(i) + "=" + data.get(i) + "}";
+                }
             }
             response += "\n";
         }

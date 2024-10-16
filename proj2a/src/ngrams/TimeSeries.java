@@ -54,7 +54,7 @@ public class TimeSeries extends TreeMap<Integer, Double> {
     }
 
     /**
-     * Returns the year-wise sum of this TimeSeries with the given TS. In other words, for
+     * Returns the year-wise sum of this TimeSeries with the given TS. In other map, for
      * each year, sum the data from this TimeSeries with the data from TS. Should return a
      * new TimeSeries (does not modify this TimeSeries).
      *

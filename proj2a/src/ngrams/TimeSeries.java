@@ -1,5 +1,6 @@
 package ngrams;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -31,6 +32,7 @@ public class TimeSeries extends TreeMap<Integer, Double> {
     public TimeSeries(TimeSeries ts, int startYear, int endYear) {
         super();
         // TODO: Fill in this constructor.
+
     }
 
     /**
@@ -38,7 +40,7 @@ public class TimeSeries extends TreeMap<Integer, Double> {
      */
     public List<Integer> years() {
         // TODO: Fill in this method.
-        return null;
+        return new ArrayList<>(this.keySet());
     }
 
     /**
@@ -47,7 +49,7 @@ public class TimeSeries extends TreeMap<Integer, Double> {
      */
     public List<Double> data() {
         // TODO: Fill in this method.
-        return null;
+        return new ArrayList<>(this.values());
     }
 
     /**
@@ -61,7 +63,10 @@ public class TimeSeries extends TreeMap<Integer, Double> {
      */
     public TimeSeries plus(TimeSeries ts) {
         // TODO: Fill in this method.
-        return null;
+        for (int i = 0; i < ts.years().size(); i++) {
+            this.merge(ts.years().get(i), ts.data().get(i), Double::sum);
+        }
+        return this;
     }
 
     /**
@@ -75,7 +80,16 @@ public class TimeSeries extends TreeMap<Integer, Double> {
      */
     public TimeSeries dividedBy(TimeSeries ts) {
         // TODO: Fill in this method.
-        return null;
+        if (!this.values().equals(ts.values())) {
+            throw new IllegalArgumentException();
+        }
+        TimeSeries divided = new TimeSeries();
+        for (int i = 0; i < this.years().size(); i += 1) {
+            int year = this.years().get(i);
+            double quotient = this.get(year) / ts.get(year);
+            divided.put(year, quotient);
+        }
+        return divided;
     }
 
     // TODO: Add any private helper methods.

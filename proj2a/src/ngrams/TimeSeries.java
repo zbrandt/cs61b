@@ -63,8 +63,10 @@ public class TimeSeries extends TreeMap<Integer, Double> {
      * should store the value from the TimeSeries that contains that year.
      */
     public TimeSeries plus(TimeSeries ts) {
-        for (int i = 0; i < ts.years().size(); i++) {
-            this.merge(ts.years().get(i), ts.data().get(i), Double::sum);
+        List<Integer> years = ts.years();
+        List<Double> data = ts.data();
+        for (int i = 0; i < years.size(); i++) {
+            this.merge(years.get(i), data.get(i), Double::sum);
         }
         return this;
     }

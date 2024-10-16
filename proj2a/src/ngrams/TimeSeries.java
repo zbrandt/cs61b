@@ -79,14 +79,15 @@ public class TimeSeries extends TreeMap<Integer, Double> {
      * If TS has a year that is not in this TimeSeries, ignore it.
      */
     public TimeSeries dividedBy(TimeSeries ts) {
-        for (Integer year : this.years()) {
+        List<Integer> years = this.years();
+        for (Integer year : years) {
             if (!ts.containsKey(year)) {
                 throw new IllegalArgumentException();
             }
         }
         TimeSeries divided = new TimeSeries();
-        for (int i = 0; i < this.years().size(); i += 1) {
-            int year = this.years().get(i);
+        for (int i = 0; i < years.size(); i += 1) {
+            int year = years.get(i);
             double quotient = this.get(year) / ts.get(year);
             divided.put(year, quotient);
         }

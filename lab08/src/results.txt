@@ -1,0 +1,69 @@
+Test #1 (L = 50, N = 10000):
+
+ULLMap: 0.68 sec
+MyHashMap: 0.02 sec
+Built-in HashMap: 0.01 sec
+
+Test #2 (L = 50, N = 25000);
+
+ULLMap: Stack Overflow
+MyHashMap: 0.02 sec
+Built-in HashMap: 0.03 sec
+
+Test #3 (L = 50: N = 50000):
+
+ULlMap: Stack Overflow
+MyHashMap: 0.05 sec
+Built-in HashMap: 0.06 sec
+
+Test #4 (L = 50, N = 200000):
+
+UllMap: Stack Overflow
+MyHashMap: 0.031 sec
+Built-in HashMap: 0.22 sec
+
+Test #5 (L = 50, N = 500000):
+
+UllMap: Stack Overflow
+MyHashMap: 0.75 sec
+Built-in HashMap: 0.54 sec
+
+The above tests are for the insert random speed tests.
+Interestingly, the hash map I constructed is ever so slightly faster than the built in class for inputs of relatively low magnitude.
+However, this advantage seems to erode at higher values, with the built in hash map clearly faster than my implementation.
+
+Test #1 (L = 50, N = 10000):
+
+ULLMap: 1.09 sec
+MyHashMap: 0.02 sec
+Built-in HashMap: 0.00 sec
+
+Test #2 (L = 50, N = 25000);
+
+ULLMap: Stack Overflow
+MyHashMap: 0.02 sec
+Built-in HashMap: 0.01 sec
+
+Test #3 (L = 50: N = 50000):
+
+ULlMap: Stack Overflow
+MyHashMap: 0.02 sec
+Built-in HashMap: 0.02 sec
+
+Test #4 (L = 50, N = 200000):
+
+UllMap: Stack Overflow
+MyHashMap: 0.06 sec
+Built-in HashMap: 0.05 sec
+
+Test #5 (L = 50, N = 500000):
+
+UllMap: Stack Overflow
+MyHashMap: 0.19 sec
+Built-in HashMap: 0.12 sec
+
+The above tests are for the insert in order speed tests.
+My code appears to be in the ballpark of the built in solution, as my times for the above tests are well within the factor of 10 range.
+Pretty neat how a simple implementation is able to work quite quickly in terms of storing elements, however, for certain use cases,
+I can imagine that this is not the best solution. For example, when storing elements by comparison to others, a BST might be more useful compared
+to a HashMap where it might be quite difficult to find the largest element.

@@ -3,8 +3,6 @@ package main;
 import browser.NgordnetQuery;
 import browser.NgordnetQueryHandler;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class HyponymsHandler extends NgordnetQueryHandler {
@@ -22,7 +20,7 @@ public class HyponymsHandler extends NgordnetQueryHandler {
         int k = q.k();
         List<String> hyponyms;
         if (k != 0) {
-             hyponyms = this.wordnet.hyponyms(words, k, startYear, endYear);
+            hyponyms = this.wordnet.hyponyms(words, k, startYear, endYear);
         } else {
             hyponyms = this.wordnet.hyponyms(words);
         }

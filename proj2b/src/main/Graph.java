@@ -5,16 +5,16 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Graph {
-    private int v;
+    private int size;
     private HashMap<Integer, List<Integer>> al;
 
     public Graph() {
-        this.v = 0;
+        this.size = 0;
         this.al = new HashMap<>();
     }
 
     public int V() {
-        return this.v;
+        return this.size;
     }
 
     public void addEdge(int v, int w) {
@@ -32,7 +32,7 @@ public class Graph {
     public void addVertex(int v) {
         if (!al.containsKey(v)) {
             al.put(v, new ArrayList<>());
-            this.v += 1;
+            this.size += 1;
         }
     }
 

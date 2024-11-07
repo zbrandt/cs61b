@@ -20,7 +20,12 @@ public class HyponymsHandler extends NgordnetQueryHandler {
         int startYear = q.startYear();
         int endYear = q.endYear();
         int k = q.k();
-        List<String> hyponyms = this.wordnet.hyponyms(words, k, startYear, endYear);
+        List<String> hyponyms;
+        if (k != 0) {
+             hyponyms = this.wordnet.hyponyms(words, k, startYear, endYear);
+        } else {
+            hyponyms = this.wordnet.hyponyms(words);
+        }
         return hyponyms.toString();
     }
 }

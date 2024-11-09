@@ -32,7 +32,7 @@ public class Main {
     public static void main(String[] args) {
         NgordnetServer hns = new NgordnetServer();
         NGramMap ngrams = new NGramMap(FREQUENCY_EECS_FILE, TOTAL_COUNTS_FILE);
-        WordNet wordnet = new WordNet(SYNSETS_EECS_FILE, HYPONYMS_EECS_FILE, ngrams);
+        WordNet wordnet = new WordNet(SMALL_SYNSET_FILE, SMALL_HYPONYM_FILE, ngrams);
 
         hns.startUp();
         hns.register("history", new DummyHistoryHandler());

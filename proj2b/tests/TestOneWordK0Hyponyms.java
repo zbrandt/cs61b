@@ -44,4 +44,17 @@ public class TestOneWordK0Hyponyms {
     }
 
     // TODO: Add more unit tests (including edge case tests) here.
+
+    @Test
+    public void testSingleWordQueryK0() {
+        NgordnetQueryHandler studentHandler = AutograderBuddy.getHyponymsHandler(
+                WORDS_FILE, TOTAL_COUNTS_FILE, SMALL_SYNSET_FILE, SMALL_HYPONYM_FILE);
+        List<String> words = new ArrayList<>();
+        words.add("increase");
+
+        NgordnetQuery nq = new NgordnetQuery(words, 0, 0, 0);
+        String actual = studentHandler.handle(nq);
+        String expected = "[increase]";
+        assertThat(actual).isEqualTo(expected);
+    }
 }

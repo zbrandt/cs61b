@@ -53,6 +53,9 @@ public class WordNet {
     public List<String> hyponyms(String hypernym) {
         List<Integer> ids = this.nounToIds.get(hypernym);
         List<String> hyponyms = new ArrayList<>();
+        if (ids == null) {
+            return hyponyms;
+        }
         hyponyms.add(hypernym);
         for (Integer id : ids) {
             Paths p = new Paths(this.graph, id);
@@ -102,11 +105,14 @@ public class WordNet {
             for (Double datum : data) {
                 count += datum;
             }
-            wordToCount.put(word, count);
+            if (count != 0) {
+                wordToCount.put(word, count);
+            }
         }
-        while (hyponyms.size() < k) {
+        Set<String> unsortedHyponyms = wordToCount.keySet();
+        while (hyponyms.size() < k && !unsortedHyponyms.isEmpty()) {
             String max = "";
-            for (String word : allHyponyms) {
+            for (String word : unsortedHyponyms) {
                 if (max.isEmpty()) {
                     max = word;
                 } else if (wordToCount.get(max) < wordToCount.get(word)) {
@@ -114,7 +120,7 @@ public class WordNet {
                 }
             }
             hyponyms.add(max);
-            allHyponyms.remove(max);
+            unsortedHyponyms.remove(max);
         }
         Collections.sort(hyponyms);
         return hyponyms;

@@ -57,4 +57,38 @@ public class TestOneWordK0Hyponyms {
         String expected = "[increase]";
         assertThat(actual).isEqualTo(expected);
     }
+
+    @Test
+    public void testMultipleContexts() {
+        NgordnetQueryHandler studentHandler = AutograderBuddy.getHyponymsHandler(
+                WORDS_FILE, TOTAL_COUNTS_FILE, SMALL_SYNSET_FILE, SMALL_HYPONYM_FILE);
+        List<String> words = new ArrayList<>();
+        words.add("transition");
+
+        NgordnetQuery nq = new NgordnetQuery(words, 1470, 2019, 0);
+        String actual = studentHandler.handle(nq);
+        String expected = "[flashback, jump, leap, saltation, transition]";
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    public void testWordNotFound() {
+        NgordnetQueryHandler studentHandler = AutograderBuddy.getHyponymsHandler(
+                WORDS_FILE, TOTAL_COUNTS_FILE, SMALL_SYNSET_FILE, SMALL_HYPONYM_FILE);
+        List<String> words = new ArrayList<>();
+        words.add("transition");
+
+        NgordnetQuery nq = new NgordnetQuery(words, 1470, 2019, 0);
+        String actual = studentHandler.handle(nq);
+        String expected = "[flashback, jump, leap, saltation, transition]";
+        assertThat(actual).isEqualTo(expected);
+
+        words.remove("transition");
+        words.add("change");
+
+        nq = new NgordnetQuery(words, 1470, 2019, 0);
+        actual = studentHandler.handle(nq);
+        expected = "[alteration, change, demotion, increase, jump, leap, modification, saltation, transition, variation]";
+        assertThat(actual).isEqualTo(expected);
+    }
 }

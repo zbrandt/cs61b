@@ -1,12 +1,15 @@
-package main;
+import browser.NgordnetQuery;
+import browser.NgordnetQueryHandler;
+import org.junit.jupiter.api.Test;
+import main.AutograderBuddy;
 
-import browser.NgordnetServer;
-import demo.DummyHistoryHandler;
-import demo.DummyHistoryTextHandler;
-import ngrams.NGramMap;
-import org.slf4j.LoggerFactory;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Main {
+import static com.google.common.truth.Truth.assertThat;
+
+public class TestOneWordKHyponyms {
+    // this case doesn't use the NGrams dataset at all, so the choice of files is irrelevant
     // ngrams files
     public static final String VERY_SHORT_WORDS_FILE = "data/ngrams/very_short.csv";
     public static final String TOTAL_COUNTS_FILE = "data/ngrams/total_counts.csv";
@@ -26,19 +29,24 @@ public class Main {
     private static final String HYPONYMS_EECS_FILE = "data/wordnet/hyponyms-EECS.txt";
     private static final String SYNSETS_EECS_FILE = "data/wordnet/synsets-EECS.txt";
 
-    static {
-        LoggerFactory.getLogger(Main.class).info("\033[1;38mChanging text color to white");
-    }
-    public static void main(String[] args) {
-        NgordnetServer hns = new NgordnetServer();
-        NGramMap ngrams = new NGramMap(SMALL_WORDS_FILE, TOTAL_COUNTS_FILE);
-        WordNet wordnet = new WordNet(SYNSETS_FILE_SUBSET, HYPONYMS_FILE_SUBSET, ngrams);
+    @Test
+    public void testBasicCaseK() {
+        NgordnetQueryHandler studentHandler = AutograderBuddy.getHyponymsHandler(
+                SMALL_WORDS_FILE, TOTAL_COUNTS_FILE, SYNSETS_FILE_SUBSET, HYPONYMS_FILE_SUBSET);
+        List<String> words = new ArrayList<>();
+        words.add("vessel");
 
-        hns.startUp();
-        hns.register("history", new DummyHistoryHandler());
-        hns.register("historytext", new DummyHistoryTextHandler());
-        hns.register("hyponyms", new HyponymsHandler(wordnet));
+        NgordnetQuery nq = new NgordnetQuery(words, 1470, 2019, 5);
+        String actual = studentHandler.handle(nq);
+        String expected = "[portal, vein, vessel]";
+        assertThat(actual).isEqualTo(expected);
 
-        System.out.println("Finished server startup! Visit http://localhost:4567/ngordnet.html");
+        words.remove("vessel");
+        words.add("tube");
+
+        nq = new NgordnetQuery(words, 1470, 2019, 6);
+        actual = studentHandler.handle(nq);
+        expected = "[portal, tube, vein, vessel]";
+        assertThat(actual).isEqualTo(expected);
     }
 }

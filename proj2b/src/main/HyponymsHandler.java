@@ -22,7 +22,11 @@ public class HyponymsHandler extends NgordnetQueryHandler {
         if (k != 0) {
             hyponyms = this.wordnet.hyponyms(words, k, startYear, endYear);
         } else {
-            hyponyms = this.wordnet.hyponyms(words);
+            if (words.size() == 1) {
+                hyponyms = this.wordnet.hyponyms(words.getFirst());
+            } else {
+                hyponyms = this.wordnet.hyponyms(words);
+            }
         }
         return hyponyms.toString();
     }

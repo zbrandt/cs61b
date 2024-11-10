@@ -5,20 +5,17 @@ import java.util.List;
 
 public class Paths {
     private List<Integer> visited;
-    private int[] edgeTo;
 
-    public Paths(Graph G, int s) {
+    public Paths(Graph g, int v) {
         this.visited = new ArrayList<>();
-        this.edgeTo = new int[G.V()];
-        dfs(G, s);
+        dfs(g, v);
     }
 
-    private void dfs(Graph G, int v) {
+    private void dfs(Graph g, int v) {
         visited.add(v);
-        for (int w : G.adj(v)) {
+        for (int w : g.adjacent(v)) {
             if (!visited.contains(w)) {
-                edgeTo[w] = v;
-                dfs(G, w);
+                dfs(g, w);
             }
         }
     }

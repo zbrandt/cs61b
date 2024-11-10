@@ -11,8 +11,6 @@ public class WordNet {
     private HashMap<String, List<Integer>> nounToIds;
     private Graph graph;
     private NGramMap ngrams;
-//    private static final int DEFAULT_STARTYEAR = 1900;
-//    private static final int DEFAULT_ENDYEAR = 2020;
 
     public WordNet(String synsetsFilename, String hyponymsFilename, NGramMap ngrams) {
         this.idToNoun = new HashMap<>();
@@ -89,10 +87,6 @@ public class WordNet {
         Collections.sort(hyponyms);
         return hyponyms;
     }
-
-//    public List<String> hyponyms(List<String> hypernyms, int k) {
-//        return hyponyms(hypernyms, k, DEFAULT_STARTYEAR, DEFAULT_ENDYEAR);
-//    }
 
     public List<String> hyponyms(List<String> hypernyms, int k, int startYear, int endYear) {
         HashMap<String, Double> wordToCount = new HashMap<>();

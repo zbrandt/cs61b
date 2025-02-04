@@ -1,0 +1,3 @@
+[submodule "proj3"]
+	path = proj3
+	url = https://github.com/zbrandt/proj3.git

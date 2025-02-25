@@ -1,3 +1,9 @@
 [submodule "proj3"]
 	path = proj3
 	url = https://github.com/zbrandt/proj3.git
+[submodule "external"]
+	path = external
+	url = https://github.com/Berkeley-CS61B/library-fa24.git
+[submodule "library-fa24"]
+	path = library-fa24
+	url = https://github.com/Berkeley-CS61B/library-fa24.git
